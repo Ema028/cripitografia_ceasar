@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
                 text[i] = rotate(text[i], key);
             }
             printf("Texto criptografado: %s\n", text);
+            free(text);
             return 0;
         }
     }
