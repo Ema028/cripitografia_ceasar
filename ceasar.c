@@ -27,41 +27,36 @@ int main(int argc, char* argv[])
     char* text = NULL;
     // contar tamanho do buffer alocado sem exceder UINT_MAX
     size_t len = 0;
-    // signed integer para casos de EOF ou erro 
+    // signed integer para contar char lido porcausa de casos de EOF ou erro 
     ssize_t read;
     printf("Texto para criptografar:\n");
     while((read = getline(&text, &len, stdin)) != -1)
     {
-        if(read > 0)
+        int key = atoi(argv[1]);
+        for(int i = 0; i < read; i++)
         {
-            int key = atoi(argv[1]);
-            for(int i; i < len; i++)
-            {
-                text[i] = rotate(text[i], key);
-            }
-            printf("Texto criptografado: %s\n", text);
-            free(text);
-            return 0;
+            text[i] = rotate(text[i], key);
         }
     }
+    printf("Texto criptografado: %s\n", text);
+    free(text);
+    return 0;
 }
 
 int key_check(char* key)
 {
-    int x = 0;
     int len = strlen(key);
     for(int i = 0; i < len; i++)
     {
-        if(isdigit(key[i]))
+        if(!isdigit(key[i]))
         {
-            x = 0;
+            return 1;
         }
         else
         {
-            x = 1;
+            return 0;
         }
     }
-    return x;
 }
 
 char rotate(char c, int n)
@@ -71,7 +66,7 @@ char rotate(char c, int n)
         // valor ascii para a = 97, A = 65, 26 letras no alfabeto 
         c = (((c - 'a') + n) % 26) + 'a';
     }
-    else
+    else if(isupper(c))
     {
         c = (((c - 'A') + n) % 26) + 'A';
     }
