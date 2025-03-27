@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     
     // forçar getline a usar malloc
     char* text = NULL;
-    // indexar array sem exceder UINT_MAX
+    // contar tamanho do buffer alocado sem exceder UINT_MAX
     size_t len = 0;
     // signed integer para casos de EOF ou erro 
     ssize_t read;
