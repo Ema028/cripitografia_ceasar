@@ -1,7 +1,7 @@
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
 int key_check(char* key);
 char rotate(char c, int n);
