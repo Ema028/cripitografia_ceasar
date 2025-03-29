@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
         }
     }
     
+    int key = atoi(argv[1]);
     // forçar getline a usar malloc
     char* text = NULL;
     // contar tamanho do buffer alocado sem exceder UINT_MAX
@@ -30,13 +31,14 @@ int main(int argc, char* argv[])
     // signed integer para contar char lido porcausa de casos de EOF ou erro 
     ssize_t read;
     printf("Texto para criptografar:\n");
-    while((read = getline(&text, &len, stdin)) != -1)
+    read = getline(&text, &len, stdin);
+    if(read == -1)
     {
-        int key = atoi(argv[1]);
-        for(int i = 0; i < read; i++)
-        {
-            text[i] = rotate(text[i], key);
-        }
+        return 1;
+    }
+    for(int i = 0; i < read; i++)
+    {
+        text[i] = rotate(text[i], key);
     }
     printf("Texto criptografado: %s\n", text);
     free(text);
@@ -72,3 +74,4 @@ char rotate(char c, int n)
     }
     return c;
 }
+
