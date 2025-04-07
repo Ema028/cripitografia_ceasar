@@ -32,15 +32,12 @@ int main(int argc, char* argv[])
     ssize_t read;
     printf("Texto para criptografar:\n");
     read = getline(&text, &len, stdin);
-    if(read == -1)
-    {
-        return 1;
-    }
+ 
     for(int i = 0; i < read; i++)
     {
         text[i] = rotate(text[i], key);
     }
-    printf("Texto criptografado: %s\n", text);
+    printf("Texto criptografado: %s", text);
     free(text);
     return 0;
 }
